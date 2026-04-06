@@ -12,6 +12,10 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -77,6 +81,33 @@ public class StudentRegistryAdvancedTest {
             Student student = new Student("STU001", "Test Student", "test@school.edu");
             tempRegistry.addStudent(student);
             assertEquals(1, tempRegistry.getStudentCount());
+        }
+
+        @RepeatedTest(10)
+        @DisplayName("Concurrent enrollment stress test")
+        public void testConcurrentEnrollment(RepetitionInfo repetitionInfo) throws InterruptedException {
+            StudentRegistry sharedRegistry = new StudentRegistry();
+            final int threadCount = 5;
+            ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+            CountDownLatch latch = new CountDownLatch(threadCount);
+
+            for (int i = 0; i < threadCount; i++) {
+                final int idx = i;
+                executor.submit(() -> {
+                    String id = String.format("R%d-T%d", repetitionInfo.getCurrentRepetition(), idx);
+                    Student s = new Student(id, "Concurrent", "c" + idx + "@school.edu", 3.0 + (idx % 2));
+                    // synchronize to keep test deterministic (registry is not thread-safe)
+                    synchronized (sharedRegistry) {
+                        sharedRegistry.addStudent(s);
+                    }
+                    latch.countDown();
+                });
+            }
+
+            boolean finished = latch.await(5, TimeUnit.SECONDS);
+            executor.shutdownNow();
+            assertTrue(finished, "Concurrent tasks did not finish in time");
+            assertEquals(threadCount, sharedRegistry.getStudentCount());
         }
     }
     

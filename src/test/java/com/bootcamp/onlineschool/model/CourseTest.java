@@ -39,6 +39,12 @@ public class CourseTest {
         assertEquals(30, course.getMaxStudents());
         assertEquals(0, course.getEnrolledStudents());
     }
+
+    // Helper assertions for common course state checks (Exercise 5)
+    private void assertCourseIsFull(Course course) {
+        assertTrue(course.isFull(), "Course should be full");
+        assertEquals(0, course.getAvailableSeats(), "Expected 0 available seats when full");
+    }
     
     @Nested
     @DisplayName("Enrollment Tests")
@@ -112,7 +118,7 @@ public class CourseTest {
             for (int i = 0; i < 30; i++) {
                 course.enrollStudent();
             }
-            assertTrue(course.isFull());
+            assertCourseIsFull(course);
         }
         
         @ParameterizedTest
@@ -174,11 +180,9 @@ public class CourseTest {
         @DisplayName("Should handle single seat course")
         public void testSingleSeatCourse() {
             Course singleSeat = new Course("CS999", "Special Topic", 1, "Dr. X", 1);
-            
             assertTrue(singleSeat.enrollStudent());
-            assertTrue(singleSeat.isFull());
+            assertCourseIsFull(singleSeat);
             assertFalse(singleSeat.enrollStudent());
-            assertEquals(0, singleSeat.getAvailableSeats());
         }
         
         @Test
