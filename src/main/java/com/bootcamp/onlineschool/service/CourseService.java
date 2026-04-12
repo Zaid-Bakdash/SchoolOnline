@@ -96,6 +96,13 @@ public class CourseService {
     public int getTotalCourses() {
         return courses.size();
     }
+
+    /**
+     * Clear all courses (for testing)
+     */
+    public void clear() {
+        courses.clear();
+    }
     
     /**
      * Custom exception for course not found

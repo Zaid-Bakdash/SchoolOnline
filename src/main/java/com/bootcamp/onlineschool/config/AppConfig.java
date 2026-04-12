@@ -1,6 +1,7 @@
 package com.bootcamp.onlineschool.config;
 
 import com.bootcamp.onlineschool.StudentRegistry;
+import com.bootcamp.onlineschool.TeacherRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,5 +24,14 @@ public class AppConfig {
     @Bean
     public StudentRegistry studentRegistry() {
         return new StudentRegistry();
+    }
+
+    /**
+     * Create TeacherRegistry bean
+     * This bean will be automatically injected into services that need it
+     */
+    @Bean
+    public TeacherRegistry teacherRegistry() {
+        return new TeacherRegistry();
     }
 }
