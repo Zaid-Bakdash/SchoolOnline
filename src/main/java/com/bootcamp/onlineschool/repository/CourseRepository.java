@@ -65,4 +65,22 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
      */
     @Query("SELECT SUM(c.enrolledStudents) FROM Course c")
     Long getTotalEnrollment();
+    
+    /**
+     * Find courses by instructor name
+     */
+    @Query("SELECT c FROM Course c WHERE c.instructor = :instructor")
+    List<Course> findCoursesByInstructor(@Param("instructor") String instructor);
+    
+    /**
+     * Find courses with enrollment rate above threshold
+     */
+    @Query("SELECT c FROM Course c WHERE (CAST(c.enrolledStudents AS DOUBLE) / c.maxStudents) >= :enrollmentRate")
+    List<Course> findCoursesWithEnrollmentRateAbove(@Param("enrollmentRate") Double enrollmentRate);
+    
+    /**
+     * Find most popular courses (highest enrollment)
+     */
+    @Query(value = "SELECT c FROM Course c ORDER BY c.enrolledStudents DESC")
+    List<Course> findMostPopularCourses(org.springframework.data.domain.Pageable pageable);
 }

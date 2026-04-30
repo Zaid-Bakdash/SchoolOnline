@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,68 +27,66 @@ class TeacherRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        testTeacher1 = new Teacher("Prof. Wilson", "prof.wilson@example.com", "EMP001", "Computer Science", LocalDate.of(2020, 8, 1));
-        testTeacher2 = new Teacher("Dr. Johnson", "dr.johnson@example.com", "EMP002", "Mathematics", LocalDate.of(2019, 9, 15));
-        testTeacher3 = new Teacher("Prof. Davis", "prof.davis@example.com", "EMP003", "Computer Science", LocalDate.of(2021, 1, 10));
-        
+        teacherRepository.deleteAll();
+        entityManager.clear();
+
+        testTeacher1 = new Teacher("T001", "Prof. Wilson", "prof.wilson@example.com", "Computer Science", 5, 75000.0, LocalDate.of(2020, 8, 1));
+        testTeacher2 = new Teacher("T002", "Dr. Johnson", "dr.johnson@example.com", "Mathematics", 10, 85000.0, LocalDate.of(2019, 9, 15));
+        testTeacher3 = new Teacher("T003", "Prof. Davis", "prof.davis@example.com", "Computer Science", 3, 65000.0, LocalDate.of(2021, 1, 10));
+
         entityManager.persistAndFlush(testTeacher1);
         entityManager.persistAndFlush(testTeacher2);
         entityManager.persistAndFlush(testTeacher3);
     }
 
     @Test
-    void findByEmployeeId_ShouldReturnTeacher_WhenEmployeeIdExists() {
+    void save_ShouldPersistTeacher() {
+        // Given
+        Teacher newTeacher = new Teacher("T004", "Dr. Smith", "dr.smith@example.com", "Physics", 8, 78000.0, LocalDate.of(2018, 5, 20));
+
         // When
-        Optional<Teacher> foundTeacher = teacherRepository.findByEmployeeId("EMP001");
+        Teacher savedTeacher = teacherRepository.save(newTeacher);
 
         // Then
-        assertThat(foundTeacher).isPresent();
-        assertThat(foundTeacher.get().getName()).isEqualTo("Prof. Wilson");
-        assertThat(foundTeacher.get().getEmployeeId()).isEqualTo("EMP001");
+        assertThat(savedTeacher.getId()).isNotNull();
+        assertThat(savedTeacher.getTeacherId()).isEqualTo("T004");
+        assertThat(savedTeacher.getName()).isEqualTo("Dr. Smith");
     }
 
     @Test
-    void findByEmployeeId_ShouldReturnEmpty_WhenEmployeeIdDoesNotExist() {
+    void findById_ShouldReturnTeacher() {
         // When
-        Optional<Teacher> foundTeacher = teacherRepository.findByEmployeeId("EMP999");
+        Teacher foundTeacher = teacherRepository.findById(testTeacher1.getId()).orElse(null);
 
         // Then
-        assertThat(foundTeacher).isEmpty();
+        assertThat(foundTeacher).isNotNull();
+        assertThat(foundTeacher.getName()).isEqualTo("Prof. Wilson");
     }
 
     @Test
-    void existsByEmployeeId_ShouldReturnTrue_WhenEmployeeIdExists() {
+    void findByTeacherId_ShouldReturnTeacher() {
         // When
-        boolean exists = teacherRepository.existsByEmployeeId("EMP002");
+        Teacher foundTeacher = teacherRepository.findByTeacherId("T001");
 
         // Then
-        assertThat(exists).isTrue();
+        assertThat(foundTeacher).isNotNull();
+        assertThat(foundTeacher.getName()).isEqualTo("Prof. Wilson");
     }
 
     @Test
-    void existsByEmployeeId_ShouldReturnFalse_WhenEmployeeIdDoesNotExist() {
+    void findByEmail_ShouldReturnTeacher() {
         // When
-        boolean exists = teacherRepository.existsByEmployeeId("EMP999");
+        Teacher foundTeacher = teacherRepository.findByEmail("dr.johnson@example.com");
 
         // Then
-        assertThat(exists).isFalse();
+        assertThat(foundTeacher).isNotNull();
+        assertThat(foundTeacher.getDepartment()).isEqualTo("Mathematics");
     }
 
     @Test
-    void findByEmail_ShouldReturnTeacher_WhenEmailExists() {
+    void findByDepartment_ShouldReturnTeachersInDepartment() {
         // When
-        Optional<Teacher> foundTeacher = teacherRepository.findByEmail("dr.johnson@example.com");
-
-        // Then
-        assertThat(foundTeacher).isPresent();
-        assertThat(foundTeacher.get().getName()).isEqualTo("Dr. Johnson");
-        assertThat(foundTeacher.get().getDepartment()).isEqualTo("Mathematics");
-    }
-
-    @Test
-    void findTeachersByDepartment_ShouldReturnTeachersInDepartment() {
-        // When
-        List<Teacher> csTeachers = teacherRepository.findTeachersByDepartment("Computer Science");
+        List<Teacher> csTeachers = teacherRepository.findByDepartment("Computer Science");
 
         // Then
         assertThat(csTeachers).hasSize(2);
@@ -98,32 +95,88 @@ class TeacherRepositoryTest {
     }
 
     @Test
-    void findTeachersByDepartment_ShouldReturnEmptyList_WhenNoDepartmentMatch() {
+    void findByYearsOfExperienceGreaterThanEqual_ShouldReturnExperiencedTeachers() {
         // When
-        List<Teacher> physicsTeachers = teacherRepository.findTeachersByDepartment("Physics");
+        List<Teacher> experiencedTeachers = teacherRepository.findByYearsOfExperienceGreaterThanEqual(5);
 
         // Then
-        assertThat(physicsTeachers).isEmpty();
+        assertThat(experiencedTeachers).hasSize(2);
+        assertThat(experiencedTeachers).extracting(Teacher::getName)
+                .containsExactlyInAnyOrder("Prof. Wilson", "Dr. Johnson");
     }
 
     @Test
-    void findTeachersByDepartmentIgnoreCase_ShouldReturnTeachersIgnoringCase() {
+    void findBySalaryBetween_ShouldReturnTeachersInSalaryRange() {
         // When
-        List<Teacher> csTeachers = teacherRepository.findTeachersByDepartmentIgnoreCase("computer science");
+        List<Teacher> midSalaryTeachers = teacherRepository.findBySalaryBetween(70000.0, 80000.0);
 
         // Then
-        assertThat(csTeachers).hasSize(2);
-        assertThat(csTeachers).extracting(Teacher::getName)
+        assertThat(midSalaryTeachers).hasSize(1);
+        assertThat(midSalaryTeachers.get(0).getName()).isEqualTo("Prof. Wilson");
+    }
+
+    @Test
+    void findAllTeachersSortedByName_ShouldReturnSortedList() {
+        // When
+        List<Teacher> sortedTeachers = teacherRepository.findAllTeachersSortedByName();
+
+        // Then
+        assertThat(sortedTeachers).hasSize(3);
+        assertThat(sortedTeachers.get(0).getName()).isEqualTo("Dr. Johnson");
+        assertThat(sortedTeachers.get(1).getName()).isEqualTo("Prof. Davis");
+        assertThat(sortedTeachers.get(2).getName()).isEqualTo("Prof. Wilson");
+    }
+
+    @Test
+    void findTeachersHiredAfter_ShouldReturnRecentlyHiredTeachers() {
+        // When
+        List<Teacher> recentTeachers = teacherRepository.findTeachersHiredAfter(LocalDate.of(2020, 1, 1));
+
+        // Then
+        assertThat(recentTeachers).hasSize(2);
+        assertThat(recentTeachers).extracting(Teacher::getName)
                 .containsExactlyInAnyOrder("Prof. Wilson", "Prof. Davis");
     }
 
     @Test
-    void findTeachersByDepartmentIgnoreCase_ShouldReturnTeachersWithMixedCase() {
+    void countTeachersByDepartment_ShouldReturnCorrectCount() {
         // When
-        List<Teacher> mathTeachers = teacherRepository.findTeachersByDepartmentIgnoreCase("MATHEMATICS");
+        Long csCount = teacherRepository.countTeachersByDepartment("Computer Science");
 
         // Then
-        assertThat(mathTeachers).hasSize(1);
-        assertThat(mathTeachers.get(0).getName()).isEqualTo("Dr. Johnson");
+        assertThat(csCount).isEqualTo(2);
+    }
+
+    @Test
+    void calculateAverageSalaryByDepartment_ShouldReturnCorrectAverage() {
+        // When
+        Double avgSalary = teacherRepository.calculateAverageSalaryByDepartment("Computer Science");
+
+        // Then
+        assertThat(avgSalary).isEqualTo(70000.0);
+    }
+
+    @Test
+    void findTopNHighestPaidTeachers_ShouldReturnSortedBySalaryDesc() {
+        // When
+        List<Teacher> topTeachers = teacherRepository.findTopNHighestPaidTeachers();
+
+        // Then
+        assertThat(topTeachers).hasSize(3);
+        assertThat(topTeachers.get(0).getName()).isEqualTo("Dr. Johnson");
+        assertThat(topTeachers.get(1).getName()).isEqualTo("Prof. Wilson");
+        assertThat(topTeachers.get(2).getName()).isEqualTo("Prof. Davis");
+    }
+
+    @Test
+    void delete_ShouldRemoveTeacher() {
+        // Given
+        Long idToDelete = testTeacher1.getId();
+
+        // When
+        teacherRepository.deleteById(idToDelete);
+
+        // Then
+        assertThat(teacherRepository.findById(idToDelete)).isEmpty();
     }
 }

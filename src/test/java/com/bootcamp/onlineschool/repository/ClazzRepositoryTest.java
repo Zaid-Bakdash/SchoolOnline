@@ -34,10 +34,8 @@ class ClazzRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        testTeacher1 = new Teacher("Prof. Wilson", "prof.wilson@example.com", "EMP001",
-                "Computer Science", LocalDate.of(2020, 8, 1));
-        testTeacher2 = new Teacher("Dr. Johnson", "dr.johnson@example.com", "EMP002", "Mathematics",
-                LocalDate.of(2019, 9, 15));
+        testTeacher1 = new Teacher("EMP001", "Prof. Wilson", "prof.wilson@example.com", "Computer Science", 5, 75000.0, LocalDate.of(2020, 8, 1));
+        testTeacher2 = new Teacher("EMP002", "Dr. Johnson", "dr.johnson@example.com", "Mathematics", 10, 85000.0, LocalDate.of(2019, 9, 15));
 
         entityManager.persistAndFlush(testTeacher1);
         entityManager.persistAndFlush(testTeacher2);

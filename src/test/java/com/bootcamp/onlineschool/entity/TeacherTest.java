@@ -23,10 +23,12 @@ class TeacherTest {
         validator = factory.getValidator();
         
         validTeacher = new Teacher(
+                "EMP001",
                 "Dr. Jane Smith",
                 "jane.smith@example.com",
-                "EMP001",
                 "Computer Science",
+                5,
+                75000.0,
                 LocalDate.of(2020, 3, 15)
         );
     }
@@ -39,7 +41,7 @@ class TeacherTest {
 
     @Test
     void testEmployeeIdRequired() {
-        validTeacher.setEmployeeId(null);
+        validTeacher.setTeacherId(null);
         Set<ConstraintViolation<Teacher>> violations = validator.validate(validTeacher);
         
         assertFalse(violations.isEmpty());
@@ -49,7 +51,7 @@ class TeacherTest {
 
     @Test
     void testEmployeeIdBlank() {
-        validTeacher.setEmployeeId("");
+        validTeacher.setTeacherId("");
         Set<ConstraintViolation<Teacher>> violations = validator.validate(validTeacher);
         
         assertFalse(violations.isEmpty());
@@ -59,7 +61,7 @@ class TeacherTest {
 
     @Test
     void testEmployeeIdTooShort() {
-        validTeacher.setEmployeeId("AB");
+        validTeacher.setTeacherId("AB");
         Set<ConstraintViolation<Teacher>> violations = validator.validate(validTeacher);
         
         assertFalse(violations.isEmpty());
@@ -69,7 +71,7 @@ class TeacherTest {
 
     @Test
     void testEmployeeIdTooLong() {
-        validTeacher.setEmployeeId("A".repeat(21));
+        validTeacher.setTeacherId("A".repeat(21));
         Set<ConstraintViolation<Teacher>> violations = validator.validate(validTeacher);
         
         assertFalse(violations.isEmpty());
@@ -162,16 +164,18 @@ class TeacherTest {
     @Test
     void testConstructorWithAllFields() {
         Teacher teacher = new Teacher(
-                "Prof. Bob Johnson", 
-                "bob@example.com", 
-                "EMP002", 
-                "Mathematics", 
+                "EMP002",
+                "Prof. Bob Johnson",
+                "bob@example.com",
+                "Mathematics",
+                8,
+                80000.0,
                 LocalDate.of(2019, 8, 1)
         );
         
         assertEquals("Prof. Bob Johnson", teacher.getName());
         assertEquals("bob@example.com", teacher.getEmail());
-        assertEquals("EMP002", teacher.getEmployeeId());
+        assertEquals("EMP002", teacher.getTeacherId());
         assertEquals("Mathematics", teacher.getDepartment());
         assertEquals(LocalDate.of(2019, 8, 1), teacher.getHireDate());
     }
@@ -182,7 +186,7 @@ class TeacherTest {
         assertNotNull(teacher);
         assertNull(teacher.getName());
         assertNull(teacher.getEmail());
-        assertNull(teacher.getEmployeeId());
+        assertNull(teacher.getTeacherId());
         assertNull(teacher.getDepartment());
         assertNull(teacher.getHireDate());
     }
@@ -190,24 +194,30 @@ class TeacherTest {
     @Test
     void testEqualsAndHashCode() {
         Teacher teacher1 = new Teacher(
-                "Dr. Jane Smith", 
-                "jane@example.com", 
-                "EMP001", 
-                "Computer Science", 
+                "EMP001",
+                "Dr. Jane Smith",
+                "jane@example.com",
+                "Computer Science",
+                5,
+                75000.0,
                 LocalDate.of(2020, 3, 15)
         );
         Teacher teacher2 = new Teacher(
-                "Prof. John Doe", 
-                "john@example.com", 
-                "EMP001", 
-                "Mathematics", 
+                "EMP001",
+                "Prof. John Doe",
+                "john@example.com",
+                "Mathematics",
+                7,
+                78000.0,
                 LocalDate.of(2019, 1, 1)
         );
         Teacher teacher3 = new Teacher(
-                "Dr. Alice Brown", 
-                "alice@example.com", 
-                "EMP002", 
-                "Physics", 
+                "EMP002",
+                "Dr. Alice Brown",
+                "alice@example.com",
+                "Physics",
+                6,
+                76000.0,
                 LocalDate.of(2021, 5, 10)
         );
         

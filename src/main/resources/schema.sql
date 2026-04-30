@@ -46,3 +46,19 @@ CREATE TABLE IF NOT EXISTS registrations (
     UNIQUE KEY unique_registration (student_id, course_id),
     INDEX idx_status (status)
 );
+
+-- Departments table
+CREATE TABLE IF NOT EXISTS departments (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    department_id VARCHAR(20) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    head VARCHAR(100),
+    budget DOUBLE NOT NULL,
+    location VARCHAR(100),
+    established_date DATE,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    INDEX idx_department_id (department_id),
+    INDEX idx_name (name),
+    INDEX idx_location (location)
+);

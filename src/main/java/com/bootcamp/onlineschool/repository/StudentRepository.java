@@ -60,4 +60,34 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
      */
     @Query("SELECT AVG(s.gpa) FROM Student s")
     Double getAverageGpa();
+    
+    /**
+     * Find students enrolled in a specific year
+     */
+    @Query("SELECT s FROM Student s WHERE FUNCTION('YEAR', s.enrollmentDate) = :year")
+    List<Student> findStudentsEnrolledInYear(@Param("year") Integer year);
+    
+    /**
+     * Find students with GPA in a specific range
+     */
+    @Query("SELECT s FROM Student s WHERE s.gpa BETWEEN :minGpa AND :maxGpa ORDER BY s.gpa DESC")
+    List<Student> findStudentsByGpaRange(@Param("minGpa") Double minGpa, @Param("maxGpa") Double maxGpa);
+    
+    /**
+     * Get student count by enrollment year
+     */
+    @Query("SELECT COUNT(s) FROM Student s WHERE FUNCTION('YEAR', s.enrollmentDate) = :year")
+    Long countStudentsByEnrollmentYear(@Param("year") Integer year);
+    
+    /**
+     * Find students with email domain
+     */
+    @Query("SELECT s FROM Student s WHERE s.email LIKE CONCAT('%', :emailDomain)")
+    List<Student> findStudentsByEmailDomain(@Param("emailDomain") String emailDomain);
+    
+    /**
+     * Find top N students by GPA
+     */
+    @Query(value = "SELECT s FROM Student s ORDER BY s.gpa DESC")
+    List<Student> findTopStudentsByGpa(org.springframework.data.domain.Pageable pageable);
 }

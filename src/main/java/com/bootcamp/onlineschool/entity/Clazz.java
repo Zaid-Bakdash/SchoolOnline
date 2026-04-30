@@ -127,17 +127,7 @@ public class Clazz {
     }
 
     public void setTeacher(Teacher teacher) {
-        // Remove from previous teacher if exists
-        if (this.teacher != null) {
-            this.teacher.getClasses().remove(this);
-        }
-        
         this.teacher = teacher;
-        
-        // Add to new teacher if not null
-        if (teacher != null && !teacher.getClasses().contains(this)) {
-            teacher.getClasses().add(this);
-        }
     }
 
     public LocalDateTime getCreatedAt() {

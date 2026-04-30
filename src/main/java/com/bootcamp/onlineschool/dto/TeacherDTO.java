@@ -12,56 +12,109 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Schema(description = "Teacher data transfer object extending user information with teacher-specific details")
-public class TeacherDTO extends UserDTO {
+@Schema(description = "Teacher data transfer object")
+public class TeacherDTO {
 
-    @Schema(description = "Unique employee identifier", example = "EMP001", required = true)
-    @NotBlank(message = "Employee ID is required")
-    @Size(min = 3, max = 20, message = "Employee ID must be between 3 and 20 characters")
-    private String employeeId;
+    @Schema(description = "Unique identifier", example = "1")
+    private Long id;
+
+    @Schema(description = "Unique teacher identifier", example = "T001", required = true)
+    @NotBlank(message = "Teacher ID is required")
+    @Size(max = 20, message = "Teacher ID must not exceed 20 characters")
+    private String teacherId;
+
+    @Schema(description = "Teacher's name", example = "Prof. Wilson", required = true)
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name must not exceed 100 characters")
+    private String name;
+
+    @Schema(description = "Teacher's email", example = "prof.wilson@example.com", required = true)
+    @NotBlank(message = "Email is required")
+    @Size(max = 100, message = "Email must not exceed 100 characters")
+    private String email;
 
     @Schema(description = "Department where the teacher works", example = "Computer Science", required = true)
     @NotBlank(message = "Department is required")
-    @Size(min = 2, max = 100, message = "Department must be between 2 and 100 characters")
+    @Size(max = 50, message = "Department must not exceed 50 characters")
     private String department;
 
-    @Schema(description = "Date when the teacher was hired", example = "2022-08-15", required = true)
+    @Schema(description = "Years of experience", example = "5", required = true)
+    @NotNull(message = "Years of experience is required")
+    private Integer yearsOfExperience;
+
+    @Schema(description = "Teacher's salary", example = "75000.0", required = true)
+    @NotNull(message = "Salary is required")
+    private Double salary;
+
+    @Schema(description = "Date when the teacher was hired", example = "2020-08-01", required = true)
     @NotNull(message = "Hire date is required")
-    @Past(message = "Hire date must be in the past")
     private LocalDate hireDate;
 
-    @Schema(description = "List of class IDs the teacher is assigned to", example = "[1, 2, 3]")
-    private Set<Long> classIds = new HashSet<>();
+    @Schema(description = "Creation timestamp")
+    private LocalDateTime createdAt;
+
+    @Schema(description = "Last update timestamp")
+    private LocalDateTime updatedAt;
 
     // Default constructor
-    public TeacherDTO() {
-        super();
-    }
+    public TeacherDTO() {}
 
     // Constructor with required fields
-    public TeacherDTO(String name, String email, String employeeId, String department, LocalDate hireDate) {
-        super(name, email);
-        this.employeeId = employeeId;
+    public TeacherDTO(String teacherId, String name, String email, String department, Integer yearsOfExperience, Double salary, LocalDate hireDate) {
+        this.teacherId = teacherId;
+        this.name = name;
+        this.email = email;
         this.department = department;
+        this.yearsOfExperience = yearsOfExperience;
+        this.salary = salary;
         this.hireDate = hireDate;
     }
 
     // Constructor with all fields
-    public TeacherDTO(Long id, String name, String email, LocalDateTime createdAt, LocalDateTime updatedAt,
-                     String employeeId, String department, LocalDate hireDate) {
-        super(id, name, email, createdAt, updatedAt);
-        this.employeeId = employeeId;
+    public TeacherDTO(Long id, String teacherId, String name, String email, String department, Integer yearsOfExperience, Double salary, LocalDate hireDate, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.teacherId = teacherId;
+        this.name = name;
+        this.email = email;
         this.department = department;
+        this.yearsOfExperience = yearsOfExperience;
+        this.salary = salary;
         this.hireDate = hireDate;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     // Getters and Setters
-    public String getEmployeeId() {
-        return employeeId;
+    public Long getId() {
+        return id;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDepartment() {
@@ -72,6 +125,22 @@ public class TeacherDTO extends UserDTO {
         this.department = department;
     }
 
+    public Integer getYearsOfExperience() {
+        return yearsOfExperience;
+    }
+
+    public void setYearsOfExperience(Integer yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
     public LocalDate getHireDate() {
         return hireDate;
     }
@@ -80,12 +149,20 @@ public class TeacherDTO extends UserDTO {
         this.hireDate = hireDate;
     }
 
-    public Set<Long> getClassIds() {
-        return classIds;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setClassIds(Set<Long> classIds) {
-        this.classIds = classIds;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     // Utility method to convert from Entity to DTO
@@ -94,51 +171,48 @@ public class TeacherDTO extends UserDTO {
             return null;
         }
 
-        TeacherDTO dto = new TeacherDTO(
+        return new TeacherDTO(
             teacher.getId(),
+            teacher.getTeacherId(),
             teacher.getName(),
             teacher.getEmail(),
-            teacher.getCreatedAt(),
-            teacher.getUpdatedAt(),
-            teacher.getEmployeeId(),
             teacher.getDepartment(),
-            teacher.getHireDate()
+            teacher.getYearsOfExperience(),
+            teacher.getSalary(),
+            teacher.getHireDate(),
+            teacher.getCreatedAt(),
+            teacher.getUpdatedAt()
         );
-
-        // Convert class relationships to IDs
-        if (teacher.getClasses() != null) {
-            teacher.getClasses().forEach(clazz -> dto.getClassIds().add(clazz.getId()));
-        }
-
-        return dto;
     }
 
     // Utility method to convert from DTO to Entity (for updates)
     public Teacher toEntity() {
-        Teacher teacher = new Teacher();
-        teacher.setId(this.getId());
-        teacher.setName(this.getName());
-        teacher.setEmail(this.getEmail());
-        teacher.setEmployeeId(this.employeeId);
-        teacher.setDepartment(this.department);
-        teacher.setHireDate(this.hireDate);
-        teacher.setCreatedAt(this.getCreatedAt());
-        teacher.setUpdatedAt(this.getUpdatedAt());
+        Teacher teacher = new Teacher(
+            this.teacherId,
+            this.name,
+            this.email,
+            this.department,
+            this.yearsOfExperience,
+            this.salary,
+            this.hireDate
+        );
+        teacher.setId(this.id);
         return teacher;
     }
 
     @Override
     public String toString() {
         return "TeacherDTO{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", employeeId='" + employeeId + '\'' +
+                "id=" + id +
+                ", teacherId='" + teacherId + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 ", department='" + department + '\'' +
+                ", yearsOfExperience=" + yearsOfExperience +
+                ", salary=" + salary +
                 ", hireDate=" + hireDate +
-                ", classIds=" + classIds +
-                ", createdAt=" + getCreatedAt() +
-                ", updatedAt=" + getUpdatedAt() +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

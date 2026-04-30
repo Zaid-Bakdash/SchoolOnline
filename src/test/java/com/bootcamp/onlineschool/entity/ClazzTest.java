@@ -24,10 +24,12 @@ class ClazzTest {
         validator = factory.getValidator();
         
         validTeacher = new Teacher(
+                "EMP001",
                 "Dr. Smith",
                 "smith@example.com",
-                "EMP001",
                 "Computer Science",
+                5,
+                75000.0,
                 LocalDate.of(2020, 1, 15)
         );
         
@@ -179,10 +181,12 @@ class ClazzTest {
     @Test
     void testTeacherRelationship() {
         Teacher newTeacher = new Teacher(
+                "EMP002",
                 "Dr. Johnson",
                 "johnson@example.com",
-                "EMP002",
                 "Mathematics",
+                10,
+                85000.0,
                 LocalDate.of(2019, 3, 10)
         );
         
@@ -194,7 +198,7 @@ class ClazzTest {
 
     @Test
     void testConstructorWithAllFields() {
-        Teacher teacher = new Teacher("Prof. Brown", "brown@example.com", "EMP003", "Physics", LocalDate.of(2018, 5, 20));
+        Teacher teacher = new Teacher("EMP003", "Prof. Brown", "brown@example.com", "Physics", 9, 82000.0, LocalDate.of(2018, 5, 20));
         Clazz clazz = new Clazz("Physics 101", "Spring", 2024, 25, teacher);
         
         assertEquals("Physics 101", clazz.getName());
