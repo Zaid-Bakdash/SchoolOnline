@@ -14,11 +14,9 @@ import java.util.stream.Collectors;
  */
 public class StudentRegistry {
     private List<Student> students;
-    private Map<String, Student> studentMap;
     
     public StudentRegistry() {
         this.students = new ArrayList<>();
-        this.studentMap = new HashMap<>();
     }
     
     /**
@@ -32,26 +30,23 @@ public class StudentRegistry {
             throw new IllegalArgumentException("Invalid email format");
         }
         students.add(student);
-        studentMap.put(student.getStudentId(), student);
     }
     
     /**
      * Remove a student by ID
      */
     public boolean removeStudent(String studentId) {
-        Student student = studentMap.remove(studentId);
-        if (student != null) {
-            students.remove(student);
-            return true;
-        }
-        return false;
+        return students.removeIf(s -> s.getStudentId().equals(studentId));
     }
     
     /**
      * Find a student by ID
      */
     public Student findStudentById(String studentId) {
-        return studentMap.get(studentId);
+        return students.stream()
+                .filter(s -> s.getStudentId().equals(studentId))
+                .findFirst()
+                .orElse(null);
     }
     
     /**
@@ -69,24 +64,6 @@ public class StudentRegistry {
     public List<Student> getAllStudentsSortedByName() {
         return students.stream()
                 .sorted(Comparator.comparing(Student::getName))
-                .collect(Collectors.toList());
-    }
-    
-    /**
-     * Get all students sorted by GPA (descending)
-     */
-    public List<Student> getAllStudentsSortedByGpa() {
-        return students.stream()
-                .sorted(Comparator.comparingDouble(Student::getGpa).reversed())
-                .collect(Collectors.toList());
-    }
-    
-    /**
-     * Get students with GPA above threshold
-     */
-    public List<Student> getStudentsWithHighGpa(double threshold) {
-        return students.stream()
-                .filter(s -> s.getGpa() >= threshold)
                 .collect(Collectors.toList());
     }
     
@@ -109,23 +86,9 @@ public class StudentRegistry {
     }
     
     /**
-     * Get average GPA
-     */
-    public double getAverageGpa() {
-        if (students.isEmpty()) {
-            return 0.0;
-        }
-        return students.stream()
-                .mapToDouble(Student::getGpa)
-                .average()
-                .orElse(0.0);
-    }
-    
-    /**
      * Clear all students
      */
     public void clear() {
         students.clear();
-        studentMap.clear();
     }
 }

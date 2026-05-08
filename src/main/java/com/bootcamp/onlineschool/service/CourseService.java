@@ -1,116 +1,110 @@
 package com.bootcamp.onlineschool.service;
 
 import com.bootcamp.onlineschool.model.Course;
+import com.bootcamp.onlineschool.repository.CourseRepository;
 import org.springframework.stereotype.Service;
-import java.util.*;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
- * CourseService demonstrates Spring Boot service with in-memory storage
- * 
+ * CourseService demonstrates Spring Boot service with JPA
+ *
  * Demonstrates:
  * - @Service annotation
- * - In-memory data management
+ * - JPA repository usage
  * - Business logic methods
+ * - Transaction management
  * - Exception handling
  */
 @Service
+@Transactional
 public class CourseService {
-    
-    private final Map<String, Course> courses = new HashMap<>();
-    
+
+    private final CourseRepository courseRepository;
+
+    public CourseService(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
+
     /**
      * Create a new course
      */
-    public Course createCourse(String courseId, String courseName, int credits, 
-                               String instructor, int maxStudents) {
-        if (courses.containsKey(courseId)) {
-            throw new CourseAlreadyExistsException("Course already exists: " + courseId);
+    public Course createCourse(Course course) {
+        if (course == null) {
+            throw new IllegalArgumentException("Course cannot be null");
         }
-        
-        Course course = new Course(courseId, courseName, credits, instructor, maxStudents);
-        courses.put(courseId, course);
-        return course;
+        return courseRepository.save(course);
     }
-    
+
     /**
      * Get course by ID
      */
-    public Course getCourseById(String courseId) {
-        Course course = courses.get(courseId);
-        if (course == null) {
-            throw new CourseNotFoundException("Course not found: " + courseId);
-        }
-        return course;
+    @Transactional(readOnly = true)
+    public Course getCourseById(Long id) {
+        return courseRepository.findByIdWithEnrollments(id)
+                .orElseThrow(() -> new CourseNotFoundException("Course not found: " + id));
     }
-    
+
     /**
      * Get all courses
      */
+    @Transactional(readOnly = true)
     public List<Course> getAllCourses() {
-        return new ArrayList<>(courses.values());
+        return courseRepository.findAll();
     }
-    
+
     /**
-     * Enroll student in course
+     * Find courses by name
      */
-    public boolean enrollStudent(String courseId) {
-        Course course = getCourseById(courseId);
-        return course.enrollStudent();
+    @Transactional(readOnly = true)
+    public List<Course> findCoursesByName(String name) {
+        return courseRepository.findByNameContainingIgnoreCase(name);
     }
-    
+
     /**
-     * Unenroll student from course
+     * Find courses by credits
      */
-    public boolean unenrollStudent(String courseId) {
-        Course course = getCourseById(courseId);
-        return course.unenrollStudent();
+    @Transactional(readOnly = true)
+    public List<Course> findCoursesByCredits(int credits) {
+        return courseRepository.findByCredits(credits);
     }
-    
+
     /**
-     * Get available courses (not full)
+     * Update course
      */
-    public List<Course> getAvailableCourses() {
-        return courses.values().stream()
-                .filter(c -> !c.isFull())
-                .toList();
+    public Course updateCourse(Long id, Course courseDetails) {
+        Course course = getCourseById(id);
+        course.setName(courseDetails.getName());
+        course.setDescription(courseDetails.getDescription());
+        course.setCredits(courseDetails.getCredits());
+        course.setDuration(courseDetails.getDuration());
+        return courseRepository.save(course);
     }
-    
-    /**
-     * Update course instructor
-     */
-    public void updateInstructor(String courseId, String newInstructor) {
-        Course course = getCourseById(courseId);
-        course.setInstructor(newInstructor);
-    }
-    
+
     /**
      * Delete course
      */
-    public boolean deleteCourse(String courseId) {
-        return courses.remove(courseId) != null;
+    public void deleteCourse(Long id) {
+        if (!courseRepository.existsById(id)) {
+            throw new CourseNotFoundException("Course not found: " + id);
+        }
+        courseRepository.deleteById(id);
     }
-    
+
     /**
      * Get total number of courses
      */
-    public int getTotalCourses() {
-        return courses.size();
+    @Transactional(readOnly = true)
+    public long getTotalCourses() {
+        return courseRepository.count();
     }
-    
+
     /**
      * Custom exception for course not found
      */
     public static class CourseNotFoundException extends RuntimeException {
         public CourseNotFoundException(String message) {
-            super(message);
-        }
-    }
-    
-    /**
-     * Custom exception for course already exists
-     */
-    public static class CourseAlreadyExistsException extends RuntimeException {
-        public CourseAlreadyExistsException(String message) {
             super(message);
         }
     }
