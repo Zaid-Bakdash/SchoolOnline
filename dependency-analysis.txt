@@ -1,0 +1,66 @@
+[[34;1mINFO[0m] Scanning for projects...
+[[34;1mINFO[0m] Loaded 22766 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[[33;1mWARNING[0m] 
+[[33;1mWARNING[0m] 1 problem was encountered while building the effective model for 'com.bootcamp:online-school:jar:0.0.1-SNAPSHOT' (use -e to see details)
+[[33;1mWARNING[0m] 
+[[33;1mWARNING[0m] Total model problems reported: 1
+[[33;1mWARNING[0m] 
+[[33;1mWARNING[0m] It is highly recommended to fix these problems because they threaten the stability of your build.
+[[33;1mWARNING[0m] 
+[[33;1mWARNING[0m] For this reason, future Maven versions might no longer support building such malformed projects.
+[[33;1mWARNING[0m] 
+[[34;1mINFO[0m] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots-c1d4c55f9308e5ac18a4069bed41dca64d85c515.txt)
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m---------------------< [36;22mcom.bootcamp:online-school[39;1m >---------------------[0m
+[[34;1mINFO[0m] [1mBuilding online-school 0.0.1-SNAPSHOT[0m
+[[34;1mINFO[0m]   from pom.xml
+[[34;1mINFO[0m] [1m--------------------------------[ jar ]---------------------------------[0m
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m>>> [32;22mdependency:3.6.1:analyze[0m [1m(default-cli) > test-compile[0m @ [36monline-school[39;1m >>>[0m
+[[33;1mWARNING[0m] 1 problem was encountered while building the effective model for 'org.springframework.data:spring-data-jpa:jar:3.2.0' during dependency collection step for project (use -X to see details)
+[[33;1mWARNING[0m] 1 problem was encountered while building the effective model for 'org.springframework.data:spring-data-commons:jar:3.2.0' during dependency collection step for project (use -X to see details)
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m--- [32;22mjacoco:0.8.10:prepare-agent[0m [1m(default)[0m @ [36monline-school[39;1m ---[0m
+[[34;1mINFO[0m] argLine set to -javaagent:/home/codespace/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar=destfile=/workspaces/SchoolOnline/target/jacoco.exec
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m--- [32;22mresources:3.3.1:resources[0m [1m(default-resources)[0m @ [36monline-school[39;1m ---[0m
+[[34;1mINFO[0m] Copying 4 resources from src/main/resources to target/classes
+[[34;1mINFO[0m] Copying 2 resources from src/main/resources to target/classes
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m--- [32;22mcompiler:3.11.0:compile[0m [1m(default-compile)[0m @ [36monline-school[39;1m ---[0m
+[[34;1mINFO[0m] Nothing to compile - all classes are up to date
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m--- [32;22mresources:3.3.1:testResources[0m [1m(default-testResources)[0m @ [36monline-school[39;1m ---[0m
+[[34;1mINFO[0m] Copying 2 resources from src/test/resources to target/test-classes
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m--- [32;22mcompiler:3.11.0:testCompile[0m [1m(default-testCompile)[0m @ [36monline-school[39;1m ---[0m
+[[34;1mINFO[0m] Nothing to compile - all classes are up to date
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m<<< [32;22mdependency:3.6.1:analyze[0m [1m(default-cli) < test-compile[0m @ [36monline-school[39;1m <<<[0m
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m--- [32;22mdependency:3.6.1:analyze[0m [1m(default-cli)[0m @ [36monline-school[39;1m ---[0m
+[[33;1mWARNING[0m] Used undeclared dependencies found:
+[[33;1mWARNING[0m]    org.springframework.boot:spring-boot-test:jar:3.2.0:test
+[[33;1mWARNING[0m]    org.springframework:spring-context:jar:6.1.1:compile
+[[33;1mWARNING[0m]    org.springframework:spring-webmvc:jar:6.1.1:compile
+[[33;1mWARNING[0m]    org.springframework:spring-beans:jar:6.1.1:compile
+[[33;1mWARNING[0m]    org.springframework.boot:spring-boot-autoconfigure:jar:3.2.0:compile
+[[33;1mWARNING[0m]    org.junit.jupiter:junit-jupiter-api:jar:5.10.1:test
+[[33;1mWARNING[0m]    org.springframework.boot:spring-boot:jar:3.2.0:compile
+[[33;1mWARNING[0m]    org.springframework:spring-web:jar:6.1.1:compile
+[[33;1mWARNING[0m] Unused declared dependencies found:
+[[33;1mWARNING[0m]    org.springframework.boot:spring-boot-starter-web:jar:3.2.0:compile
+[[33;1mWARNING[0m]    org.springframework.boot:spring-boot-starter-data-jpa:jar:3.2.0:compile
+[[33;1mWARNING[0m]    org.springframework.boot:spring-boot-starter-validation:jar:3.2.0:compile
+[[33;1mWARNING[0m]    com.h2database:h2:jar:2.2.224:runtime
+[[33;1mWARNING[0m]    org.projectlombok:lombok:jar:1.18.30:provided
+[[33;1mWARNING[0m]    org.springframework.boot:spring-boot-starter-test:jar:3.2.0:test
+[[33;1mWARNING[0m] Non-test scoped test only dependencies found:
+[[33;1mWARNING[0m]    org.springframework:spring-beans:jar:6.1.1:compile
+[[34;1mINFO[0m] [1m------------------------------------------------------------------------[0m
+[[34;1mINFO[0m] [32;1mBUILD SUCCESS[0m
+[[34;1mINFO[0m] [1m------------------------------------------------------------------------[0m
+[[34;1mINFO[0m] Total time:  4.877 s
+[[34;1mINFO[0m] Finished at: 2026-05-16T06:46:05Z
+[[34;1mINFO[0m] [1m------------------------------------------------------------------------[0m

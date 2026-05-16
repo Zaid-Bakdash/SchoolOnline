@@ -1,0 +1,141 @@
+[[34;1mINFO[0m] Scanning for projects...
+[[34;1mINFO[0m] Loaded 22766 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[[33;1mWARNING[0m] 
+[[33;1mWARNING[0m] 1 problem was encountered while building the effective model for 'com.bootcamp:online-school:jar:0.0.1-SNAPSHOT' (use -e to see details)
+[[33;1mWARNING[0m] 
+[[33;1mWARNING[0m] Total model problems reported: 1
+[[33;1mWARNING[0m] 
+[[33;1mWARNING[0m] It is highly recommended to fix these problems because they threaten the stability of your build.
+[[33;1mWARNING[0m] 
+[[33;1mWARNING[0m] For this reason, future Maven versions might no longer support building such malformed projects.
+[[33;1mWARNING[0m] 
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/springframework/boot/maven-metadata.xml
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0mio/github/git-commit-id/maven-metadata.xml
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/jacoco/maven-metadata.xml
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/flywaydb/maven-metadata.xml
+Progress (1): 234 BProgress (2): 234 B | 237 BProgress (3): 234 B | 237 B | 255 BProgress (4): 234 B | 237 B | 255 B | 249 B                                           Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/jacoco/maven-metadata.xml[2m (237 B at 342.2 B/s)[0m
+Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/flywaydb/maven-metadata.xml[2m (234 B at 334.9 B/s)[0m
+Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/springframework/boot/maven-metadata.xml[2m (249 B at 356.2 B/s)[0m
+Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0mio/github/git-commit-id/maven-metadata.xml[2m (255 B at 363.8 B/s)[0m
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/jooq/maven-metadata.xml
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/liquibase/maven-metadata.xml
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/jetbrains/kotlin/maven-metadata.xml
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/graalvm/buildtools/maven-metadata.xml
+Progress (1): 242 B                   Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/graalvm/buildtools/maven-metadata.xml[2m (242 B at 4.2 kB/s)[0m
+Progress (1): 398 B                   Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/jooq/maven-metadata.xml[2m (398 B at 5.5 kB/s)[0m
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/apache/maven/plugins/maven-metadata.xml
+Progress (1): 394 B                   Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/liquibase/maven-metadata.xml[2m (394 B at 5.3 kB/s)[0m
+Progress (1): 375 B                   Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/jetbrains/kotlin/maven-metadata.xml[2m (375 B at 5.1 kB/s)[0m
+[2mDownloading from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/codehaus/mojo/maven-metadata.xml
+Progress (1): 1.0/21 kBProgress (1): 2.4/21 kBProgress (1): 3.8/21 kBProgress (1): 5.1/21 kBProgress (1): 6.5/21 kBProgress (1): 7.9/21 kBProgress (2): 7.9/21 kB | 0.9/14 kBProgress (2): 7.9/21 kB | 2.3/14 kBProgress (2): 7.9/21 kB | 3.6/14 kBProgress (2): 7.9/21 kB | 5.0/14 kBProgress (2): 7.9/21 kB | 6.4/14 kBProgress (2): 7.9/21 kB | 7.8/14 kBProgress (2): 8.2/21 kB | 7.8/14 kBProgress (2): 9.6/21 kB | 7.8/14 kBProgress (2): 11/21 kB | 7.8/14 kB Progress (2): 12/21 kB | 7.8/14 kBProgress (2): 14/21 kB | 7.8/14 kBProgress (2): 15/21 kB | 7.8/14 kBProgress (2): 16/21 kB | 7.8/14 kBProgress (2): 18/21 kB | 7.8/14 kBProgress (2): 19/21 kB | 7.8/14 kBProgress (2): 21/21 kB | 7.8/14 kBProgress (2): 21 kB | 7.8/14 kB   Progress (2): 21 kB | 9.1/14 kBProgress (2): 21 kB | 10/14 kB Progress (2): 21 kB | 12/14 kBProgress (2): 21 kB | 13/14 kBProgress (2): 21 kB | 14 kB                              Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/apache/maven/plugins/maven-metadata.xml[2m (14 kB at 201.4 kB/s)[0m
+Downloaded[2m from [0mcentral[2m: https://repo.maven.apache.org/maven2/[0morg/codehaus/mojo/maven-metadata.xml[2m (21 kB at 262.7 kB/s)[0m
+[[34;1mINFO[0m] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots-c1d4c55f9308e5ac18a4069bed41dca64d85c515.txt)
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m---------------------< [36;22mcom.bootcamp:online-school[39;1m >---------------------[0m
+[[34;1mINFO[0m] [1mBuilding online-school 0.0.1-SNAPSHOT[0m
+[[34;1mINFO[0m]   from pom.xml
+[[34;1mINFO[0m] [1m--------------------------------[ jar ]---------------------------------[0m
+[[33;1mWARNING[0m] 1 problem was encountered while building the effective model for 'org.springframework.data:spring-data-jpa:jar:3.2.0' during dependency collection step for project (use -X to see details)
+[[33;1mWARNING[0m] 1 problem was encountered while building the effective model for 'org.springframework.data:spring-data-commons:jar:3.2.0' during dependency collection step for project (use -X to see details)
+[[34;1mINFO[0m] 
+[[34;1mINFO[0m] [1m--- [32;22mdependency:3.6.1:tree[0m [1m(default-cli)[0m @ [36monline-school[39;1m ---[0m
+[[34;1mINFO[0m] com.bootcamp:online-school:jar:0.0.1-SNAPSHOT
+[[34;1mINFO[0m] +- org.springframework.boot:spring-boot-starter-web:jar:3.2.0:compile
+[[34;1mINFO[0m] |  +- org.springframework.boot:spring-boot-starter:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  +- org.springframework.boot:spring-boot:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  +- org.springframework.boot:spring-boot-autoconfigure:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  +- org.springframework.boot:spring-boot-starter-logging:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  |  +- ch.qos.logback:logback-classic:jar:1.4.11:compile
+[[34;1mINFO[0m] |  |  |  |  \- ch.qos.logback:logback-core:jar:1.4.11:compile
+[[34;1mINFO[0m] |  |  |  +- org.apache.logging.log4j:log4j-to-slf4j:jar:2.21.1:compile
+[[34;1mINFO[0m] |  |  |  |  \- org.apache.logging.log4j:log4j-api:jar:2.21.1:compile
+[[34;1mINFO[0m] |  |  |  \- org.slf4j:jul-to-slf4j:jar:2.0.9:compile
+[[34;1mINFO[0m] |  |  +- jakarta.annotation:jakarta.annotation-api:jar:2.1.1:compile
+[[34;1mINFO[0m] |  |  \- org.yaml:snakeyaml:jar:2.2:compile
+[[34;1mINFO[0m] |  +- org.springframework.boot:spring-boot-starter-json:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.15.3:compile
+[[34;1mINFO[0m] |  |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.15.3:compile
+[[34;1mINFO[0m] |  |  |  \- com.fasterxml.jackson.core:jackson-core:jar:2.15.3:compile
+[[34;1mINFO[0m] |  |  +- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:jar:2.15.3:compile
+[[34;1mINFO[0m] |  |  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.15.3:compile
+[[34;1mINFO[0m] |  |  \- com.fasterxml.jackson.module:jackson-module-parameter-names:jar:2.15.3:compile
+[[34;1mINFO[0m] |  +- org.springframework.boot:spring-boot-starter-tomcat:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  +- org.apache.tomcat.embed:tomcat-embed-core:jar:10.1.16:compile
+[[34;1mINFO[0m] |  |  \- org.apache.tomcat.embed:tomcat-embed-websocket:jar:10.1.16:compile
+[[34;1mINFO[0m] |  +- org.springframework:spring-web:jar:6.1.1:compile
+[[34;1mINFO[0m] |  |  +- org.springframework:spring-beans:jar:6.1.1:compile
+[[34;1mINFO[0m] |  |  \- io.micrometer:micrometer-observation:jar:1.12.0:compile
+[[34;1mINFO[0m] |  |     \- io.micrometer:micrometer-commons:jar:1.12.0:compile
+[[34;1mINFO[0m] |  \- org.springframework:spring-webmvc:jar:6.1.1:compile
+[[34;1mINFO[0m] |     +- org.springframework:spring-aop:jar:6.1.1:compile
+[[34;1mINFO[0m] |     +- org.springframework:spring-context:jar:6.1.1:compile
+[[34;1mINFO[0m] |     \- org.springframework:spring-expression:jar:6.1.1:compile
+[[34;1mINFO[0m] +- org.springframework.boot:spring-boot-starter-data-jpa:jar:3.2.0:compile
+[[34;1mINFO[0m] |  +- org.springframework.boot:spring-boot-starter-aop:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  \- org.aspectj:aspectjweaver:jar:1.9.20.1:compile
+[[34;1mINFO[0m] |  +- org.springframework.boot:spring-boot-starter-jdbc:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  +- com.zaxxer:HikariCP:jar:5.0.1:compile
+[[34;1mINFO[0m] |  |  \- org.springframework:spring-jdbc:jar:6.1.1:compile
+[[34;1mINFO[0m] |  +- org.hibernate.orm:hibernate-core:jar:6.3.1.Final:compile
+[[34;1mINFO[0m] |  |  +- jakarta.persistence:jakarta.persistence-api:jar:3.1.0:compile
+[[34;1mINFO[0m] |  |  +- jakarta.transaction:jakarta.transaction-api:jar:2.0.1:compile
+[[34;1mINFO[0m] |  |  +- org.jboss.logging:jboss-logging:jar:3.5.3.Final:compile
+[[34;1mINFO[0m] |  |  +- org.hibernate.common:hibernate-commons-annotations:jar:6.0.6.Final:runtime
+[[34;1mINFO[0m] |  |  +- io.smallrye:jandex:jar:3.1.2:runtime
+[[34;1mINFO[0m] |  |  +- com.fasterxml:classmate:jar:1.6.0:compile
+[[34;1mINFO[0m] |  |  +- net.bytebuddy:byte-buddy:jar:1.14.10:runtime
+[[34;1mINFO[0m] |  |  +- org.glassfish.jaxb:jaxb-runtime:jar:4.0.4:runtime
+[[34;1mINFO[0m] |  |  |  \- org.glassfish.jaxb:jaxb-core:jar:4.0.4:runtime
+[[34;1mINFO[0m] |  |  |     +- org.eclipse.angus:angus-activation:jar:2.0.1:runtime
+[[34;1mINFO[0m] |  |  |     +- org.glassfish.jaxb:txw2:jar:4.0.4:runtime
+[[34;1mINFO[0m] |  |  |     \- com.sun.istack:istack-commons-runtime:jar:4.1.2:runtime
+[[34;1mINFO[0m] |  |  +- jakarta.inject:jakarta.inject-api:jar:2.0.1:runtime
+[[34;1mINFO[0m] |  |  \- org.antlr:antlr4-runtime:jar:4.10.1:compile
+[[34;1mINFO[0m] |  +- org.springframework.data:spring-data-jpa:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  +- org.springframework.data:spring-data-commons:jar:3.2.0:compile
+[[34;1mINFO[0m] |  |  +- org.springframework:spring-orm:jar:6.1.1:compile
+[[34;1mINFO[0m] |  |  +- org.springframework:spring-tx:jar:6.1.1:compile
+[[34;1mINFO[0m] |  |  \- org.slf4j:slf4j-api:jar:2.0.9:compile
+[[34;1mINFO[0m] |  \- org.springframework:spring-aspects:jar:6.1.1:compile
+[[34;1mINFO[0m] +- org.springframework.boot:spring-boot-starter-validation:jar:3.2.0:compile
+[[34;1mINFO[0m] |  +- org.apache.tomcat.embed:tomcat-embed-el:jar:10.1.16:compile
+[[34;1mINFO[0m] |  \- org.hibernate.validator:hibernate-validator:jar:8.0.1.Final:compile
+[[34;1mINFO[0m] |     \- jakarta.validation:jakarta.validation-api:jar:3.0.2:compile
+[[34;1mINFO[0m] +- com.h2database:h2:jar:2.2.224:runtime
+[[34;1mINFO[0m] +- org.projectlombok:lombok:jar:1.18.30:provided
+[[34;1mINFO[0m] \- org.springframework.boot:spring-boot-starter-test:jar:3.2.0:test
+[[34;1mINFO[0m]    +- org.springframework.boot:spring-boot-test:jar:3.2.0:test
+[[34;1mINFO[0m]    +- org.springframework.boot:spring-boot-test-autoconfigure:jar:3.2.0:test
+[[34;1mINFO[0m]    +- com.jayway.jsonpath:json-path:jar:2.8.0:test
+[[34;1mINFO[0m]    +- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.1:runtime
+[[34;1mINFO[0m]    |  \- jakarta.activation:jakarta.activation-api:jar:2.1.2:runtime
+[[34;1mINFO[0m]    +- net.minidev:json-smart:jar:2.5.0:test
+[[34;1mINFO[0m]    |  \- net.minidev:accessors-smart:jar:2.5.0:test
+[[34;1mINFO[0m]    |     \- org.ow2.asm:asm:jar:9.3:test
+[[34;1mINFO[0m]    +- org.assertj:assertj-core:jar:3.24.2:test
+[[34;1mINFO[0m]    +- org.awaitility:awaitility:jar:4.2.0:test
+[[34;1mINFO[0m]    +- org.hamcrest:hamcrest:jar:2.2:test
+[[34;1mINFO[0m]    +- org.junit.jupiter:junit-jupiter:jar:5.10.1:test
+[[34;1mINFO[0m]    |  +- org.junit.jupiter:junit-jupiter-api:jar:5.10.1:test
+[[34;1mINFO[0m]    |  |  +- org.opentest4j:opentest4j:jar:1.3.0:test
+[[34;1mINFO[0m]    |  |  +- org.junit.platform:junit-platform-commons:jar:1.10.1:test
+[[34;1mINFO[0m]    |  |  \- org.apiguardian:apiguardian-api:jar:1.1.2:test
+[[34;1mINFO[0m]    |  +- org.junit.jupiter:junit-jupiter-params:jar:5.10.1:test
+[[34;1mINFO[0m]    |  \- org.junit.jupiter:junit-jupiter-engine:jar:5.10.1:test
+[[34;1mINFO[0m]    |     \- org.junit.platform:junit-platform-engine:jar:1.10.1:test
+[[34;1mINFO[0m]    +- org.mockito:mockito-core:jar:5.7.0:test
+[[34;1mINFO[0m]    |  +- net.bytebuddy:byte-buddy-agent:jar:1.14.10:test
+[[34;1mINFO[0m]    |  \- org.objenesis:objenesis:jar:3.3:test
+[[34;1mINFO[0m]    +- org.mockito:mockito-junit-jupiter:jar:5.7.0:test
+[[34;1mINFO[0m]    +- org.skyscreamer:jsonassert:jar:1.5.1:test
+[[34;1mINFO[0m]    |  \- com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1:test
+[[34;1mINFO[0m]    +- org.springframework:spring-core:jar:6.1.1:compile
+[[34;1mINFO[0m]    |  \- org.springframework:spring-jcl:jar:6.1.1:compile
+[[34;1mINFO[0m]    +- org.springframework:spring-test:jar:6.1.1:test
+[[34;1mINFO[0m]    \- org.xmlunit:xmlunit-core:jar:2.9.1:test
+[[34;1mINFO[0m] [1m------------------------------------------------------------------------[0m
+[[34;1mINFO[0m] [32;1mBUILD SUCCESS[0m
+[[34;1mINFO[0m] [1m------------------------------------------------------------------------[0m
+[[34;1mINFO[0m] Total time:  9.113 s
+[[34;1mINFO[0m] Finished at: 2026-05-16T06:42:34Z
+[[34;1mINFO[0m] [1m------------------------------------------------------------------------[0m
