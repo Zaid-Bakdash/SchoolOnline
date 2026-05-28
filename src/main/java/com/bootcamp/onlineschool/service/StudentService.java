@@ -89,6 +89,20 @@ public class StudentService {
         return studentRegistry.getAverageGpa();
     }
     
+    // DTO conversion helpers
+    public com.bootcamp.onlineschool.dto.StudentDTO toDto(Student s) {
+        if (s == null) return null;
+        return new com.bootcamp.onlineschool.dto.StudentDTO(
+                s.getStudentId(), s.getName(), s.getEmail(), s.getGpa());
+    }
+    
+    public Student fromDto(com.bootcamp.onlineschool.dto.StudentDTO dto) {
+        if (dto == null) return null;
+        Double gpa = dto.getGpa() == null ? 0.0 : dto.getGpa();
+        Student s = new Student(dto.getId(), dto.getName(), dto.getEmail(), gpa);
+        return s;
+    }
+    
     /**
      * Custom exception for student not found
      */

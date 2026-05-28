@@ -96,6 +96,20 @@ public class CourseService {
     public int getTotalCourses() {
         return courses.size();
     }
+
+    // DTO conversion helpers
+    public com.bootcamp.onlineschool.dto.CourseDTO toDto(Course c) {
+        if (c == null) return null;
+        return new com.bootcamp.onlineschool.dto.CourseDTO(
+                c.getCourseId(), c.getCourseName(), c.getCredits(), c.getInstructor(), c.getMaxStudents(), c.getEnrolledStudents());
+    }
+
+    public Course fromDto(com.bootcamp.onlineschool.dto.CourseDTO dto) {
+        if (dto == null) return null;
+        Course c = new Course(dto.getId(), dto.getCourseName(), dto.getCredits(), dto.getInstructor(), dto.getMaxStudents());
+        // try to set enrolledStudents if provided - Course doesn't have setter for enrolledStudents
+        return c;
+    }
     
     /**
      * Custom exception for course not found
