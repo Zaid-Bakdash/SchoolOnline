@@ -5,7 +5,9 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import HomePage from './components/pages/HomePage';
 import StudentsPage from './components/pages/StudentsPage';
+import StudentDetails from './components/pages/StudentDetails';
 import CoursesPage from './components/pages/CoursesPage';
+import TeachersPage from './components/pages/TeachersPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 
 export default function App() {
@@ -17,7 +19,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/students" element={<StudentsPage />} />
+            <Route path="/students/:id" element={<StudentDetails />} />
             <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/teachers" element={<TeachersPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Container>

@@ -13,7 +13,7 @@ export default function Header() {
         >
           Online School
         </Typography>
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
           <Button
             color="inherit"
             component={RouterLink}
@@ -37,6 +37,14 @@ export default function Header() {
             sx={{ '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' } }}
           >
             Courses
+          </Button>
+          <Button
+            color="inherit"
+            component={RouterLink}
+            to="/teachers"
+            sx={{ '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' } }}
+          >
+            Teachers
           </Button>
         </Box>
       </Toolbar>

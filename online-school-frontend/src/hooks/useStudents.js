@@ -51,11 +51,13 @@ export default function useStudents() {
   };
 
   const removeStudent = async (id) => {
+    const previous = students;
+    setStudents((prev) => prev.filter((s) => s.id !== id));
     try {
       await deleteStudent(id);
-      setStudents(students.filter(s => s.id !== id));
     } catch (err) {
-      setError(err.message);
+      setStudents(previous);
+      setError(err.message || 'Unable to delete student');
       throw err;
     }
   };

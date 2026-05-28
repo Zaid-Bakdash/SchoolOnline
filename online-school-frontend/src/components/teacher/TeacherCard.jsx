@@ -9,42 +9,35 @@ import {
   Chip
 } from '@mui/material';
 
-export default function StudentCard({ student, onEdit, onDelete, onView }) {
+export default function TeacherCard({ teacher, onEdit, onDelete }) {
   return (
     <Card sx={{ mb: 2, '&:hover': { boxShadow: 4 } }}>
-      <CardContent
-        sx={{ cursor: onView ? 'pointer' : 'default' }}
-        onClick={() => onView?.(student)}
-      >
+      <CardContent>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
           <Box>
             <Typography variant="h6" component="div">
-              {student.name}
+              {teacher.name}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="textSecondary">
-              {student.email}
+              {teacher.email}
             </Typography>
           </Box>
-          <Chip
-            label={student.studentId || 'Unknown ID'}
-            color="primary"
-            variant="outlined"
-          />
+          <Chip label={teacher.department || 'General'} color="primary" variant="outlined" />
         </Box>
         <Box sx={{ display: 'flex', gap: 2, mt: 2, flexWrap: 'wrap' }}>
           <Typography variant="body2">
-            <strong>Enrollment:</strong> {student.enrollmentDate || 'N/A'}
+            <strong>Employee ID:</strong> {teacher.employeeId}
           </Typography>
           <Typography variant="body2">
-            <strong>Record:</strong> {student.id}
+            <strong>Hire Date:</strong> {teacher.hireDate || 'N/A'}
           </Typography>
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => onEdit?.(student)}>
+        <Button size="small" onClick={() => onEdit?.(teacher)}>
           Edit
         </Button>
-        <Button size="small" color="error" onClick={() => onDelete?.(student.id)}>
+        <Button size="small" color="error" onClick={() => onDelete?.(teacher.id)}>
           Delete
         </Button>
       </CardActions>

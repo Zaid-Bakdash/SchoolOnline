@@ -1,14 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { TextField, Button, Box, Alert, Stack } from '@mui/material';
 
-const initialStudent = {
+const initialTeacher = {
   name: '',
   email: '',
-  studentId: '',
-  enrollmentDate: ''
+  employeeId: '',
+  department: '',
+  hireDate: ''
 };
 
-const validateStudent = (values) => {
+const validateTeacher = (values) => {
   const errors = {};
   if (!values.name.trim()) {
     errors.name = 'Name is required';
@@ -22,33 +23,37 @@ const validateStudent = (values) => {
     errors.email = 'Enter a valid email address';
   }
 
-  if (!values.studentId.trim()) {
-    errors.studentId = 'Student ID is required';
+  if (!values.employeeId.trim()) {
+    errors.employeeId = 'Employee ID is required';
   }
 
-  if (!values.enrollmentDate) {
-    errors.enrollmentDate = 'Enrollment date is required';
-  } else if (new Date(values.enrollmentDate) > new Date()) {
-    errors.enrollmentDate = 'Enrollment date must be in the past';
+  if (!values.department.trim()) {
+    errors.department = 'Department is required';
+  }
+
+  if (!values.hireDate) {
+    errors.hireDate = 'Hire date is required';
+  } else if (new Date(values.hireDate) > new Date()) {
+    errors.hireDate = 'Hire date cannot be in the future';
   }
 
   return errors;
 };
 
-export default function StudentForm({ onSubmit, initialData = null, onSuccess, onCancel }) {
-  const [formData, setFormData] = useState(initialData || initialStudent);
+export default function TeacherForm({ onSubmit, initialData = null, onCancel }) {
+  const [formData, setFormData] = useState(initialData || initialTeacher);
   const [touched, setTouched] = useState({});
   const [submitError, setSubmitError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    setFormData(initialData || initialStudent);
+    setFormData(initialData || initialTeacher);
     setTouched({});
     setSubmitError(null);
     setSuccessMessage('');
   }, [initialData]);
 
-  const errors = useMemo(() => validateStudent(formData), [formData]);
+  const errors = useMemo(() => validateTeacher(formData), [formData]);
   const isValid = Object.keys(errors).length === 0;
 
   const handleChange = (e) => {
@@ -66,7 +71,7 @@ export default function StudentForm({ onSubmit, initialData = null, onSuccess, o
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setTouched({ name: true, email: true, studentId: true, enrollmentDate: true });
+    setTouched({ name: true, email: true, employeeId: true, department: true, hireDate: true });
     setSubmitError(null);
 
     if (!isValid) {
@@ -75,13 +80,9 @@ export default function StudentForm({ onSubmit, initialData = null, onSuccess, o
 
     try {
       await onSubmit(formData);
-      if (!initialData) {
-        setFormData(initialStudent);
-      }
-      setSuccessMessage('Student saved successfully');
-      onSuccess?.();
+      setSuccessMessage('Teacher saved successfully');
     } catch (err) {
-      setSubmitError(err.message || 'Failed to submit form');
+      setSubmitError(err.message || 'Unable to save teacher');
     }
   };
 
@@ -102,6 +103,7 @@ export default function StudentForm({ onSubmit, initialData = null, onSuccess, o
           helperText={touched.name && errors.name}
           required
         />
+
         <TextField
           fullWidth
           label="Email"
@@ -114,33 +116,48 @@ export default function StudentForm({ onSubmit, initialData = null, onSuccess, o
           helperText={touched.email && errors.email}
           required
         />
+
         <TextField
           fullWidth
-          label="Student ID"
-          name="studentId"
-          value={formData.studentId}
+          label="Employee ID"
+          name="employeeId"
+          value={formData.employeeId}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={Boolean(touched.studentId && errors.studentId)}
-          helperText={touched.studentId && errors.studentId}
+          error={Boolean(touched.employeeId && errors.employeeId)}
+          helperText={touched.employeeId && errors.employeeId}
           required
         />
+
         <TextField
           fullWidth
-          label="Enrollment Date"
-          name="enrollmentDate"
-          type="date"
-          value={formData.enrollmentDate}
+          label="Department"
+          name="department"
+          value={formData.department}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={Boolean(touched.enrollmentDate && errors.enrollmentDate)}
-          helperText={touched.enrollmentDate && errors.enrollmentDate}
+          error={Boolean(touched.department && errors.department)}
+          helperText={touched.department && errors.department}
+          required
+        />
+
+        <TextField
+          fullWidth
+          label="Hire Date"
+          name="hireDate"
+          type="date"
+          value={formData.hireDate}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={Boolean(touched.hireDate && errors.hireDate)}
+          helperText={touched.hireDate && errors.hireDate}
           InputLabelProps={{ shrink: true }}
           required
         />
+
         <Stack direction="row" spacing={2} sx={{ pt: 1 }}>
           <Button type="submit" variant="contained" disabled={!isValid}>
-            Save Student
+            Save Teacher
           </Button>
           {onCancel && (
             <Button type="button" variant="outlined" onClick={onCancel}>
