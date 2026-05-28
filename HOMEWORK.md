@@ -1,5 +1,7 @@
 # Lab 6: Backend API - Homework Assignment
 
+**Finalization status:** Not finalized — some controller tests fail (see test reports).
+
 ## Overview
 
 This homework assignment reinforces REST API development concepts. You'll practice building complete REST controllers, implementing proper HTTP methods, handling requests and responses, and testing APIs with MockMvc.
