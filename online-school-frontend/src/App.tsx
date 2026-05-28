@@ -10,6 +10,11 @@ import Teachers from './pages/Teachers';
 import Courses from './pages/Courses';
 import Classes from './pages/Classes';
 import Registrations from './pages/Registrations';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import NotFound from './pages/NotFound';
+import ProtectedRoute from './components/ProtectedRoute';
+import RoleBasedRoute from './components/RoleBasedRoute';
 
 const theme = createTheme({
   palette: {
@@ -43,12 +48,15 @@ function App() {
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <Routes>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/students" element={<Students />} />
-              <Route path="/teachers" element={<Teachers />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/classes" element={<Classes />} />
-              <Route path="/registrations" element={<Registrations />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/students" element={<ProtectedRoute><Students /></ProtectedRoute>} />
+              <Route path="/teachers" element={<RoleBasedRoute allowedRoles={["ADMIN", "TEACHER"]}><Teachers /></RoleBasedRoute>} />
+              <Route path="/courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+              <Route path="/classes" element={<ProtectedRoute><Classes /></ProtectedRoute>} />
+              <Route path="/registrations" element={<ProtectedRoute><Registrations /></ProtectedRoute>} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Box>
         </Box>

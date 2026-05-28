@@ -14,12 +14,17 @@ import {
   Book,
   Class,
   Assignment,
+  Login as LoginIcon,
+  AppRegistration,
+  Logout,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   const menuItems = [
     { label: 'Dashboard', path: '/dashboard', icon: <Dashboard /> },
@@ -37,8 +42,8 @@ const Navbar: React.FC = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Online School Management
         </Typography>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          {menuItems.map((item) => (
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          {user && menuItems.map((item) => (
             <Button
               key={item.path}
               color="inherit"
@@ -54,6 +59,33 @@ const Navbar: React.FC = () => {
               {item.label}
             </Button>
           ))}
+          {user ? (
+            <>
+              <Typography sx={{ mr: 2 }}>
+                {user.username} ({user.role})
+              </Typography>
+              <Button color="inherit" startIcon={<Logout />} onClick={logout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                color="inherit"
+                startIcon={<LoginIcon />}
+                onClick={() => navigate('/login')}
+              >
+                Login
+              </Button>
+              <Button
+                color="inherit"
+                startIcon={<AppRegistration />}
+                onClick={() => navigate('/register')}
+              >
+                Register
+              </Button>
+            </>
+          )}
         </Box>
       </Toolbar>
     </AppBar>
